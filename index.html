@@ -110,11 +110,11 @@
       <div id="ask" class="screen active">
         <p class="eyebrow">A little question for you</p>
         <h1>Hi, will you go on a date with me?</h1>
-        <p class="copy">I promise good food, good company, and at least one excellent story.</p>
+        <p class="copy">Since you're at ACH like our first date, I figured I could do a little better and help you leave the hospital...</p>
         <button class="yes primary" data-next="confirm">Yes, I’d love to 💗</button>
         <div class="arena" id="arena">
           <button class="no" id="dodge" aria-label="No (this button is feeling evasive)">No</button>
-          <p class="dodge-caption" id="dodgeCaption">There is technically another option…</p>
+          <p class="dodge-caption" id="dodgeCaption">Choosing wisely…</p>
         </div>
       </div>
 
@@ -132,7 +132,7 @@
       <div id="plan" class="screen">
         <p class="yay">Yay!</p>
         <h1>What are you in the mood for?</h1>
-        <p class="copy">Choose the vibe. I’ll take care of the rest.</p>
+        <p class="copy">Time to make a decision loosu.</p>
         <div class="foods" role="radiogroup" aria-label="Food choices">
           <button class="food" data-code="01" data-label="Italian" data-emoji="🍝"><span class="emoji">🍝</span>Italian</button>
           <button class="food" data-code="02" data-label="Sushi" data-emoji="🍣"><span class="emoji">🍣</span>Sushi</button>
@@ -171,7 +171,7 @@
           <strong id="code"></strong>
           <button class="copy-code" id="copyCode">Copy number</button>
         </div>
-        <p class="fine">No answers were sent anywhere—the number contains your selections.</p>
+        <p class="fine">Thank you hehe.</p>
       </div>
     </section>
   </main>
@@ -183,7 +183,7 @@
     document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.next)));
 
     const arena=document.getElementById('arena'),dodge=document.getElementById('dodge'),caption=document.getElementById('dodgeCaption');
-    function moveNo(e){ if(e) e.preventDefault(); const x=Math.max(8,Math.random()*(arena.clientWidth-124)); const y=Math.max(8,Math.random()*(arena.clientHeight-68)); dodge.style.transform=`translate(${x}px,${y}px)`; state.dodges++; caption.textContent=state.dodges<4?'Hmm. It seems shy.':'I don’t think it wants to be chosen.'; }
+    function moveNo(e){ if(e) e.preventDefault(); const x=Math.max(8,Math.random()*(arena.clientWidth-124)); const y=Math.max(8,Math.random()*(arena.clientHeight-68)); dodge.style.transform=`translate(${x}px,${y}px)`; state.dodges++; caption.textContent=state.dodges<4?'Aiyyoo':'Loosu don’t be mean to meeeee'; }
     dodge.addEventListener('pointerenter',moveNo); dodge.addEventListener('pointerdown',moveNo); dodge.addEventListener('focus',moveNo);
 
     const shrink=document.getElementById('shrinkNo'),grow=document.getElementById('growYes'),evidence=document.getElementById('evidence');
