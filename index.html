@@ -121,7 +121,7 @@
       <div id="confirm" class="screen">
         <p class="eyebrow">One tiny follow-up</p>
         <h1>Are you sure?</h1>
-        <p class="copy">This decision may result in snacks, laughter, and a suspiciously well-planned afternoon.</p>
+        <p class="copy">For realz this time hehe</p>
         <div class="confirm-actions">
           <button class="yes" id="growYes" data-next="plan">Yes!</button>
           <button class="no" id="shrinkNo">No</button>
@@ -132,7 +132,7 @@
       <div id="plan" class="screen">
         <p class="yay">Yay!</p>
         <h1>What are you in the mood for?</h1>
-        <p class="copy">Time to make a decision loosu.</p>
+        <p class="copy">Time to make a decision Loosu.</p>
         <div class="foods" role="radiogroup" aria-label="Food choices">
           <button class="food" data-code="01" data-label="Italian" data-emoji="🍝"><span class="emoji">🍝</span>Italian</button>
           <button class="food" data-code="02" data-label="Sushi" data-emoji="🍣"><span class="emoji">🍣</span>Sushi</button>
@@ -164,7 +164,7 @@
         <div class="final-heart" aria-hidden="true">♥</div>
         <p class="eyebrow">Officially accepted</p>
         <h1>Thank you for accepting this offer.</h1>
-        <p class="copy">We will return momentarily with a proper plan.</p>
+        <p class="copy">Athy will get back to you shortly with a dress code and proper plan. Thank you very much cutie ;)</p>
         <div class="summary"><span id="foodSummary"></span><span id="dateSummary"></span><span id="timeSummary"></span></div>
         <div class="code-card">
           <p>Text me this confirmation number:</p>
@@ -187,7 +187,7 @@
     dodge.addEventListener('pointerenter',moveNo); dodge.addEventListener('pointerdown',moveNo); dodge.addEventListener('focus',moveNo);
 
     const shrink=document.getElementById('shrinkNo'),grow=document.getElementById('growYes'),evidence=document.getElementById('evidence');
-    shrink.addEventListener('click',()=>{ state.resistance++; shrink.style.fontSize=Math.max(7,16-state.resistance*2)+'px'; shrink.style.opacity=Math.max(.36,1-state.resistance*.1); shrink.textContent=state.resistance>5?'no?':'No'; grow.style.fontSize=(18+state.resistance*3)+'px'; grow.style.padding=(15+state.resistance*2)+'px '+(28+state.resistance*5)+'px'; evidence.textContent='The evidence for “yes” is getting stronger.'; });
+    shrink.addEventListener('click',()=>{ state.resistance++; shrink.style.fontSize=Math.max(7,16-state.resistance*2)+'px'; shrink.style.opacity=Math.max(.36,1-state.resistance*.1); shrink.textContent=state.resistance>5?'no?':'No'; grow.style.fontSize=(18+state.resistance*3)+'px'; grow.style.padding=(15+state.resistance*2)+'px '+(28+state.resistance*5)+'px'; evidence.textContent='Pwetty pweaseeeeeee'; });
 
     const foods=[...document.querySelectorAll('.food')],foodNext=document.getElementById('foodNext');
     foods.forEach(b=>b.addEventListener('click',()=>{ foods.forEach(x=>{x.classList.remove('selected');x.setAttribute('aria-checked','false')}); b.classList.add('selected'); b.setAttribute('aria-checked','true'); state.food={code:b.dataset.code,label:b.dataset.label,emoji:b.dataset.emoji}; foodNext.disabled=false; }));
