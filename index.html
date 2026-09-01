@@ -110,7 +110,7 @@
       <div id="ask" class="screen active">
         <p class="eyebrow">A little question for you</p>
         <h1>Hi, will you go on a date with me?</h1>
-        <p class="copy">Since you're at ACH like our first date, I figured I could do a little better and help you leave the hospital...</p>
+        <p class="copy">Since you're at the ACH, like our first date, I figured I could do a little better and actually take you on a date outside the hospital...</p>
         <button class="yes primary" data-next="confirm">Yes, I’d love to 💗</button>
         <div class="arena" id="arena">
           <button class="no" id="dodge" aria-label="No (this button is feeling evasive)">No</button>
@@ -183,7 +183,7 @@
     document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.next)));
 
     const arena=document.getElementById('arena'),dodge=document.getElementById('dodge'),caption=document.getElementById('dodgeCaption');
-    function moveNo(e){ if(e) e.preventDefault(); const x=Math.max(8,Math.random()*(arena.clientWidth-124)); const y=Math.max(8,Math.random()*(arena.clientHeight-68)); dodge.style.transform=`translate(${x}px,${y}px)`; state.dodges++; caption.textContent=state.dodges<4?'Aiyyoo':'Loosu don’t be mean to meeeee'; }
+    function moveNo(e){ if(e) e.preventDefault(); const x=Math.max(8,Math.random()*(arena.clientWidth-124)); const y=Math.max(8,Math.random()*(arena.clientHeight-68)); dodge.style.transform=`translate(${x}px,${y}px)`; state.dodges++; caption.textContent=state.dodges<4?'Aiyyoo, why is it moving so much?':'Loosu, don’t be mean to meeeee :('; }
     dodge.addEventListener('pointerenter',moveNo); dodge.addEventListener('pointerdown',moveNo); dodge.addEventListener('focus',moveNo);
 
     const shrink=document.getElementById('shrinkNo'),grow=document.getElementById('growYes'),evidence=document.getElementById('evidence');
