@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3a4c4">
+  <title>Click to open preview 💗</title>
+  <meta name="description" content="I have a little question for you…">
+  <meta property="og:title" content="Click to open preview 💗">
+  <meta property="og:description" content="I have a little question for you…">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://doubleaboy.github.io/a-little-question/">
+  <meta property="og:image" content="https://doubleaboy.github.io/a-little-question/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Click to open preview 💗">
+  <meta name="twitter:description" content="I have a little question for you…">
+  <meta name="twitter:image" content="https://doubleaboy.github.io/a-little-question/og.png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --ink:#53172f; --muted:#805166; --pink:#d83a77; --soft:#ffe2ed;
+      --line:#efbfd1; --paper:#fffafd;
+    }
+    * { box-sizing:border-box; }
+    html { background:#f8bbd2; }
+    body { margin:0; color:var(--ink); font-family:ui-rounded,"SF Pro Rounded","Avenir Next",Avenir,sans-serif; background:#f8bbd2; }
+    button,select { font:inherit; }
+    button { -webkit-tap-highlight-color:transparent; }
+    .shell {
+      min-height:100svh; display:grid; place-items:center; position:relative; overflow:hidden; padding:24px 16px;
+      background:radial-gradient(circle at 18% 12%,rgba(255,255,255,.75) 0 4px,transparent 5px),
+                 radial-gradient(circle at 84% 18%,rgba(255,255,255,.65) 0 3px,transparent 4px),
+                 linear-gradient(150deg,#ffd9e7 0%,#f7a9c8 52%,#ee82ae 100%);
+    }
+    .shell:before { content:""; position:absolute; inset:0; opacity:.2; pointer-events:none; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E"); }
+    .ambient { position:absolute; color:rgba(255,255,255,.62); font-family:Georgia,serif; pointer-events:none; }
+    .a1 { top:8%; left:7%; font-size:60px; transform:rotate(-18deg); }
+    .a2 { right:7%; bottom:10%; font-size:48px; transform:rotate(18deg); }
+    .a3 { top:22%; right:10%; font-size:25px; }
+    .card { width:min(100%,520px); min-height:min(740px,calc(100svh - 40px)); position:relative; z-index:2; overflow:hidden; display:flex; border:1px solid rgba(255,255,255,.9); border-radius:32px; background:rgba(255,250,253,.95); box-shadow:0 28px 80px rgba(102,19,54,.24),inset 0 1px 0 #fff; backdrop-filter:blur(16px); }
+    .seal { position:absolute; top:20px; left:50%; width:44px; height:44px; transform:translateX(-50%) rotate(-8deg); display:grid; place-items:center; border-radius:50%; color:#fff; font-size:20px; background:var(--pink); box-shadow:0 8px 22px rgba(217,59,120,.28); z-index:4; }
+    .screen { width:100%; min-height:100%; padding:88px 28px 34px; text-align:center; display:none; flex-direction:column; align-items:center; animation:arrive .48s cubic-bezier(.2,.8,.2,1) both; }
+    .screen.active { display:flex; }
+    .eyebrow { margin:0 0 12px; color:#b12f63; font-size:12px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; }
+    h1 { margin:0; max-width:420px; color:#57162f; font-family:Georgia,"Times New Roman",serif; font-size:clamp(36px,9vw,54px); font-weight:500; line-height:1.03; letter-spacing:-.035em; }
+    .copy { max-width:380px; margin:18px auto 28px; color:var(--muted); font-size:16px; line-height:1.6; }
+    .yes,.no,.food,.copy-code { border:0; cursor:pointer; }
+    .yes { min-height:54px; border-radius:999px; color:#fff; font-size:17px; font-weight:800; background:linear-gradient(135deg,#ea5b91,#c92f6c); box-shadow:0 12px 28px rgba(201,47,108,.28),inset 0 1px 0 rgba(255,255,255,.35); transition:transform .2s ease,opacity .2s ease,padding .25s ease,font-size .25s ease; }
+    .yes:active { transform:scale(.97); }
+    .yes:disabled { opacity:.42; cursor:not-allowed; box-shadow:none; }
+    .yes:focus-visible,.no:focus-visible,.food:focus-visible,.copy-code:focus-visible,select:focus-visible { outline:3px solid #772044; outline-offset:4px; }
+    .primary { padding:0 30px; }
+    .arena { width:100%; height:190px; margin-top:20px; position:relative; border:1px dashed rgba(201,47,108,.23); border-radius:24px; background:rgba(255,226,237,.32); }
+    .no { min-width:88px; min-height:46px; border:1px solid #e3a6bd; border-radius:999px; color:#8e4762; background:#fff9fc; box-shadow:0 7px 18px rgba(83,25,48,.08); }
+    #dodge { position:absolute; top:0; left:0; z-index:2; transform:translate(52px,58px); transition:transform .15s cubic-bezier(.2,.9,.4,1.3); touch-action:none; }
+    .dodge-caption { position:absolute; left:20px; right:20px; bottom:12px; margin:0; color:#aa7388; font-size:12px; }
+    #confirm { justify-content:center; padding-top:70px; }
+    .confirm-actions { min-height:220px; display:flex; flex-direction:column; align-items:center; gap:25px; }
+    #growYes { padding:15px 28px; }
+    #shrinkNo { padding:10px 22px; transition:all .25s ease; }
+    .note { color:#b15b7d; font-size:13px; margin:0; min-height:20px; }
+    #plan { padding-left:22px; padding-right:22px; }
+    .yay { margin:-2px 0 8px; color:#d32f70; font-family:Georgia,"Times New Roman",serif; font-size:68px; font-style:italic; line-height:.9; }
+    #plan h1,#schedule h1,#done h1 { font-size:clamp(31px,8vw,44px); }
+    #plan .copy,#schedule .copy { margin-bottom:20px; }
+    .foods { width:100%; display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+    .food { min-height:74px; padding:12px 8px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; border:1px solid var(--line); border-radius:18px; color:#68253e; font-size:14px; font-weight:750; background:var(--paper); transition:transform .18s ease,border-color .18s ease,background .18s ease; }
+    .food .emoji { font-size:24px; }
+    .food.selected { border-color:#d53a75; background:var(--soft); transform:translateY(-2px); box-shadow:0 8px 20px rgba(201,47,108,.13); }
+    .continue { width:100%; margin-top:20px; }
+    #schedule { padding-left:20px; padding-right:20px; }
+    .calendar { width:100%; padding:14px 10px 12px; border:1px solid var(--line); border-radius:24px; background:var(--paper); box-shadow:0 10px 30px rgba(96,29,57,.08); }
+    .month-title { margin:0 0 12px; font-weight:800; color:#67253f; }
+    .weekdays,.days { display:grid; grid-template-columns:repeat(7,1fr); gap:3px; }
+    .weekdays span { padding:5px 0; color:#a26b80; font-size:11px; font-weight:700; }
+    .day { aspect-ratio:1; display:grid; place-items:center; border:0; border-radius:50%; color:#b393a0; background:transparent; font-size:13px; }
+    .day.available { cursor:pointer; color:#6b203f; font-weight:850; background:#ffe3ee; box-shadow:inset 0 0 0 1px #efbad0; }
+    .day.available.selected { color:#fff; background:#d73a76; box-shadow:0 6px 14px rgba(201,47,108,.25); }
+    .time-field { width:100%; margin-top:16px; text-align:left; }
+    .time-field label { display:block; margin:0 0 7px 4px; color:#6d3149; font-size:13px; font-weight:800; }
+    select { width:100%; height:52px; padding:0 15px; border:1px solid #efb8cd; border-radius:16px; color:#5a2038; background:#fffafd; font-size:16px; }
+    #done { justify-content:center; }
+    .final-heart { width:72px; height:72px; margin-bottom:20px; display:grid; place-items:center; border-radius:50%; color:#fff; font-size:34px; background:linear-gradient(135deg,#ed679a,#c72d6a); animation:heartbeat 1.4s ease infinite; }
+    .summary { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:0 0 22px; }
+    .summary span { padding:8px 12px; border-radius:999px; color:#762546; font-size:13px; font-weight:750; background:#ffe3ee; }
+    .code-card { width:100%; padding:20px; border:1px solid #ecb6ca; border-radius:22px; background:#fff8fb; }
+    .code-card p { margin:0 0 8px; color:#815468; font-size:13px; }
+    .code-card strong { display:block; color:#58152e; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:clamp(22px,7vw,34px); letter-spacing:.06em; word-break:break-all; }
+    .copy-code { margin-top:14px; padding:10px 18px; border-radius:999px; color:#912552; font-weight:800; background:#ffdcea; }
+    .fine { margin:14px 0 0; color:#a27385; font-size:11px; line-height:1.5; }
+    .confetti { position:fixed; inset:0; z-index:8; overflow:hidden; pointer-events:none; }
+    .confetti span { position:absolute; top:-10vh; color:#d72f73; font-size:18px; animation:fall linear infinite; }
+    .confetti span:nth-child(3n) { color:#fff; }
+    .confetti span:nth-child(4n) { color:#f4a22b; }
+    @keyframes arrive { from { opacity:0; transform:translateY(14px) scale(.985); } to { opacity:1; transform:none; } }
+    @keyframes heartbeat { 0%,100% { transform:scale(1); } 15% { transform:scale(1.08); } 28% { transform:scale(1); } 42% { transform:scale(1.06); } }
+    @keyframes fall { 0% { transform:translateY(-10vh) rotate(0); opacity:0; } 8% { opacity:1; } 100% { transform:translateY(115vh) rotate(720deg); opacity:.8; } }
+    @media(max-width:420px) { .shell{padding:0}.card{min-height:100svh;border:0;border-radius:0}.screen{padding-top:80px}.arena{height:210px} }
+    @media(prefers-reduced-motion:reduce) { *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important} }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="ambient a1" aria-hidden="true">♡</div><div class="ambient a2" aria-hidden="true">♥</div><div class="ambient a3" aria-hidden="true">♡</div>
+    <section class="card" aria-live="polite">
+      <div class="seal" aria-hidden="true">♥</div>
+
+      <div id="ask" class="screen active">
+        <p class="eyebrow">A little question for you</p>
+        <h1>Hi, will you go on a date with me?</h1>
+        <p class="copy">I promise good food, good company, and at least one excellent story.</p>
+        <button class="yes primary" data-next="confirm">Yes, I’d love to 💗</button>
+        <div class="arena" id="arena">
+          <button class="no" id="dodge" aria-label="No (this button is feeling evasive)">No</button>
+          <p class="dodge-caption" id="dodgeCaption">There is technically another option…</p>
+        </div>
+      </div>
+
+      <div id="confirm" class="screen">
+        <p class="eyebrow">One tiny follow-up</p>
+        <h1>Are you sure?</h1>
+        <p class="copy">This decision may result in snacks, laughter, and a suspiciously well-planned afternoon.</p>
+        <div class="confirm-actions">
+          <button class="yes" id="growYes" data-next="plan">Yes!</button>
+          <button class="no" id="shrinkNo">No</button>
+        </div>
+        <p class="note" id="evidence"></p>
+      </div>
+
+      <div id="plan" class="screen">
+        <p class="yay">Yay!</p>
+        <h1>What are you in the mood for?</h1>
+        <p class="copy">Choose the vibe. I’ll take care of the rest.</p>
+        <div class="foods" role="radiogroup" aria-label="Food choices">
+          <button class="food" data-code="01" data-label="Italian" data-emoji="🍝"><span class="emoji">🍝</span>Italian</button>
+          <button class="food" data-code="02" data-label="Sushi" data-emoji="🍣"><span class="emoji">🍣</span>Sushi</button>
+          <button class="food" data-code="03" data-label="Indian" data-emoji="🍛"><span class="emoji">🍛</span>Indian</button>
+          <button class="food" data-code="04" data-label="Tacos" data-emoji="🌮"><span class="emoji">🌮</span>Tacos</button>
+          <button class="food" data-code="05" data-label="Dessert & coffee" data-emoji="🍰"><span class="emoji">🍰</span>Dessert &amp; coffee</button>
+          <button class="food" data-code="06" data-label="Surprise me" data-emoji="✨"><span class="emoji">✨</span>Surprise me</button>
+        </div>
+        <button class="yes continue" id="foodNext" disabled data-next="schedule">Pick a day →</button>
+      </div>
+
+      <div id="schedule" class="screen">
+        <p class="eyebrow">Save me a spot</p>
+        <h1>When works for our date?</h1>
+        <p class="copy">Friday morning, or any time Saturday or Sunday.</p>
+        <div class="calendar" aria-label="Select a date">
+          <p class="month-title" id="monthTitle"></p>
+          <div class="weekdays" aria-hidden="true"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+          <div class="days" id="days"></div>
+        </div>
+        <div class="time-field">
+          <label for="time">What time?</label>
+          <select id="time" disabled><option value="">Choose a day first</option></select>
+        </div>
+        <button class="yes continue" id="confirmDate" disabled>Confirm our date 💗</button>
+      </div>
+
+      <div id="done" class="screen">
+        <div class="final-heart" aria-hidden="true">♥</div>
+        <p class="eyebrow">Officially accepted</p>
+        <h1>Thank you for accepting this offer.</h1>
+        <p class="copy">We will return momentarily with a proper plan.</p>
+        <div class="summary"><span id="foodSummary"></span><span id="dateSummary"></span><span id="timeSummary"></span></div>
+        <div class="code-card">
+          <p>Text me this confirmation number:</p>
+          <strong id="code"></strong>
+          <button class="copy-code" id="copyCode">Copy number</button>
+        </div>
+        <p class="fine">No answers were sent anywhere—the number contains your selections.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const state={food:null,date:null,time:"",dodges:0,resistance:0};
+    const screens=[...document.querySelectorAll('.screen')];
+    function show(id){ screens.forEach(s=>s.classList.toggle('active',s.id===id)); if(id==='plan') confetti(); }
+    document.querySelectorAll('[data-next]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.next)));
+
+    const arena=document.getElementById('arena'),dodge=document.getElementById('dodge'),caption=document.getElementById('dodgeCaption');
+    function moveNo(e){ if(e) e.preventDefault(); const x=Math.max(8,Math.random()*(arena.clientWidth-124)); const y=Math.max(8,Math.random()*(arena.clientHeight-68)); dodge.style.transform=`translate(${x}px,${y}px)`; state.dodges++; caption.textContent=state.dodges<4?'Hmm. It seems shy.':'I don’t think it wants to be chosen.'; }
+    dodge.addEventListener('pointerenter',moveNo); dodge.addEventListener('pointerdown',moveNo); dodge.addEventListener('focus',moveNo);
+
+    const shrink=document.getElementById('shrinkNo'),grow=document.getElementById('growYes'),evidence=document.getElementById('evidence');
+    shrink.addEventListener('click',()=>{ state.resistance++; shrink.style.fontSize=Math.max(7,16-state.resistance*2)+'px'; shrink.style.opacity=Math.max(.36,1-state.resistance*.1); shrink.textContent=state.resistance>5?'no?':'No'; grow.style.fontSize=(18+state.resistance*3)+'px'; grow.style.padding=(15+state.resistance*2)+'px '+(28+state.resistance*5)+'px'; evidence.textContent='The evidence for “yes” is getting stronger.'; });
+
+    const foods=[...document.querySelectorAll('.food')],foodNext=document.getElementById('foodNext');
+    foods.forEach(b=>b.addEventListener('click',()=>{ foods.forEach(x=>{x.classList.remove('selected');x.setAttribute('aria-checked','false')}); b.classList.add('selected'); b.setAttribute('aria-checked','true'); state.food={code:b.dataset.code,label:b.dataset.label,emoji:b.dataset.emoji}; foodNext.disabled=false; }));
+
+    function dateOnly(d){ const x=new Date(d); x.setHours(12,0,0,0); return x; }
+    const today=dateOnly(new Date()),untilFriday=(5-today.getDay()+7)%7,friday=dateOnly(today); friday.setDate(today.getDate()+untilFriday);
+    const weekend=[friday,new Date(friday),new Date(friday)]; weekend[1].setDate(friday.getDate()+1); weekend[2].setDate(friday.getDate()+2);
+    const monthTitle=document.getElementById('monthTitle'),days=document.getElementById('days'),time=document.getElementById('time'),confirmDate=document.getElementById('confirmDate');
+    function key(d){return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`}
+    function renderCalendar(){ const year=friday.getFullYear(),month=friday.getMonth(); monthTitle.textContent=friday.toLocaleDateString(undefined,{month:'long',year:'numeric'}); const first=new Date(year,month,1),last=new Date(year,month+1,0); for(let i=0;i<first.getDay();i++)days.append(document.createElement('span')); for(let n=1;n<=last.getDate();n++){ const d=dateOnly(new Date(year,month,n)),btn=document.createElement('button'); btn.className='day'; btn.textContent=n; const available=weekend.find(x=>key(x)===key(d)); if(available){btn.classList.add('available');btn.setAttribute('aria-label',d.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}));btn.addEventListener('click',()=>selectDate(d,btn));}else btn.disabled=true; days.append(btn); }
+      if(weekend[2].getMonth()!==month){ const nextMonth=weekend[2].getMonth(),nextYear=weekend[2].getFullYear(); for(let n=1;n<=weekend[2].getDate();n++){ const d=dateOnly(new Date(nextYear,nextMonth,n)),btn=document.createElement('button'); btn.className='day'; btn.textContent=n; const available=weekend.find(x=>key(x)===key(d)); if(available){btn.classList.add('available');btn.setAttribute('aria-label',d.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}));btn.addEventListener('click',()=>selectDate(d,btn));}else btn.disabled=true; days.append(btn); } monthTitle.textContent=friday.toLocaleDateString(undefined,{month:'short'})+'–'+weekend[2].toLocaleDateString(undefined,{month:'short',year:'numeric'}); }
+    }
+    function selectDate(d,btn){ document.querySelectorAll('.day.selected').forEach(x=>x.classList.remove('selected')); btn.classList.add('selected'); state.date=d; state.time=''; time.disabled=false; time.innerHTML='<option value="">Choose a time</option>'; const end=(d.getDay()===5?12:21)*60; for(let mins=540;mins<=end;mins+=30){const h=Math.floor(mins/60),m=mins%60,period=h>=12?'PM':'AM',display=h%12||12,opt=document.createElement('option');opt.value=String(h).padStart(2,'0')+String(m).padStart(2,'0');opt.textContent=`${display}:${String(m).padStart(2,'0')} ${period}`;time.append(opt);} confirmDate.disabled=true; }
+    time.addEventListener('change',()=>{state.time=time.value;confirmDate.disabled=!state.time});
+    function confirmationCode(){const d=state.date,payload=state.food.code+String(d.getFullYear()).slice(-2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+state.time;const sum=[...payload].reduce((s,n,i)=>s+Number(n)*(i+3),0)%97;return payload+String(sum).padStart(2,'0')}
+    confirmDate.addEventListener('click',()=>{ const timeText=time.options[time.selectedIndex].text; document.getElementById('foodSummary').textContent=`${state.food.emoji} ${state.food.label}`; document.getElementById('dateSummary').textContent=state.date.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}); document.getElementById('timeSummary').textContent=timeText; document.getElementById('code').textContent=confirmationCode(); show('done'); });
+    document.getElementById('copyCode').addEventListener('click',async e=>{ const code=document.getElementById('code').textContent; try{await navigator.clipboard.writeText(code);e.target.textContent='Copied!'}catch{e.target.textContent='Press and hold the number'} });
+    function confetti(){const layer=document.createElement('div');layer.className='confetti';for(let i=0;i<36;i++){const p=document.createElement('span');p.textContent=['♥','✦','●','♡'][i%4];p.style.left=((i*37)%100)+'%';p.style.animationDelay=((i%9)*.13)+'s';p.style.animationDuration=(2.6+(i%5)*.34)+'s';layer.append(p)}document.body.append(layer);setTimeout(()=>layer.remove(),7000)}
+    renderCalendar();
+  </script>
+</body>
+</html>
